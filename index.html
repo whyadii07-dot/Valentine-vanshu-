@@ -1,1 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vanshuu ❤️</title>
 
+<style>
+*{box-sizing:border-box;font-family:Poppins,sans-serif}
+body{
+  margin:0;
+  background:linear-gradient(180deg,#ff5f9e,#ffc371);
+  overflow-x:hidden;
+}
+.slide{
+  min-height:100vh;
+  display:none;
+  justify-content:center;
+  align-items:center;
+  padding:20px;
+  text-align:center;
+}
+.slide.active{display:flex}
+.card{
+  background:#fff;
+  max-width:380px;
+  width:100%;
+  padding:25px;
+  border-radius:25px;
+  box-shadow:0 20px 40px rgba(0,0,0,.3);
+  position:relative;
+}
+h1,h2{color:#ff3366}
+p{font-size:15px;color:#444;line-height:1.8}
+button{
+  width:100%;
+  padding:14px;
+  margin-top:12px;
+  border-radius:30px;
+  border:none;
+  font-size:16px;
+  font-weight:600;
+}
+.yes{background:#2ecc71;color:#fff}
+.no{background:#ff4757;color:#fff;position:absolute}
+.next{background:#ff3366;color:#fff}
+
+/* photo show */
+.photo-box img{
+  width:100%;
+  height:220px;
+  object-fit:cover;
+  border-radius:15px;
+}
+.caption{
+  margin-top:12px;
+  font-size:14.5px;
+  line-height:1.7;
+  color:#555;
+}
+
+/* typewriter */
+.typebox{
+  text-align:left;
+  white-space:pre-wrap;
+  min-height:320px;
+}
+
+/* hearts */
+.heart{
+  position:fixed;
+  font-size:20px;
+  animation:float 5s linear infinite;
+}
+@keyframes float{
+  from{transform:translateY(100vh);opacity:0}
+  to{transform:translateY(-10vh);opacity:1}
+}
+</style>
+</head>
+
+<body>
+
+<!-- MUSIC -->
+<audio id="bgm" loop>
+  <source src="song.mp3" type="audio/mp3">
+</audio>
+
+<!-- SLIDE 1 -->
+<div class="slide active" id="s1">
+  <div class="card">
+    <h1>Hey Vanshuu 💕</h1>
+    <p>Will you be my Valentine? 🌹</p>
+    <button class="yes" onclick="startMusic();go(2)">YES 😍</button>
+    <button class="no" id="noBtn">NO 🙈</button>
+  </div>
+</div>
+
+<!-- SLIDE 2 -->
+<div class="slide" id="s2">
+  <div class="card">
+    <h2>Think Again 😌</h2>
+    <p>Some moments deserve a little pause…</p>
+    <button class="next" onclick="go(3)">Continue 💕</button>
+  </div>
+</div>
+
+<!-- SLIDE 3 : PHOTOS -->
+<div class="slide" id="s3">
+  <div class="card">
+    <h2>Our Memories 📸</h2>
+    <div class="photo-box">
+      <img id="photo" src="photo1.jpg">
+    </div>
+    <div class="caption" id="caption"></div>
+    <button class="next" onclick="go(4)">Next 💖</button>
+  </div>
+</div>
+
+<!-- SLIDE 4 -->
+<div class="slide" id="s4">
+  <div class="card">
+    <h2>From My Heart 💌</h2>
+    <p>
+      Vanshuu, thoda sa ruk jao… bas ek minute ke liye 💗
+Mujhe pata hai life kabhi-kabhi fast ho jaati hai, sab kuch jaldi-jaldi chalne lagta hai, par tumhare saath har cheez thodi si slow ho jaati hai. Tumhari presence mein time ka flow alag feel hota hai — jaise duniya thodi shaant ho gayi ho aur sirf hum dono hi exist kar rahe ho.
+Sach bolun toh maine kabhi plan nahi kiya tha kisi ko itna important bana lene ka. Par phir tum aayi, aur bina kisi warning ke meri routine, meri thinking, aur meri priorities sab change ho gayi. Tumhari hasi mein ek comfort hai, tumhari baaton mein ek warmth hai, aur tumhari khamoshi mein bhi ek ajeeb si sukoon wali feeling hai. Tum mere liye sirf ek person nahi ho, tum woh feeling ho jisse main apne worst din pe bhi thoda better feel kar leta hoon.
+Humne saath mein bohot zyada cheezein share ki hain — choti-choti baatein, random laughs, kuch serious talks, aur kuch moments jo shayad kisi aur ko simple lagenge, par mere liye bohot special hain. Tumhare saath har memory ek safe place jaisi lagti hai, jahan main bina pretend kiye khud reh sakta hoon.
+Main perfect nahi hoon, aur main yeh promise bhi nahi kar sakta ki sab kuch hamesha easy hoga. Par main yeh zaroor promise kar sakta hoon ki main try karta rahunga. Tumhare saath khada rahunga, chahe din ache ho ya mushkil. Main tumhari khushi mein tumhare saath hansunga, aur jab tum thak jao, toh tumhara haath pakad ke tumhe yaad dilaaunga ki tum akeli nahi ho.
+Yeh sab kehne ka ek hi reason hai…
+Kyuki jo main ab poochne wala hoon, woh sirf ek question nahi hai — woh meri feelings ka sabse honest form hai ❤️
+    </p>
+    <button class="next" onclick="go(5)">One Last Thing 💞</button>
+  </div>
+</div>
+
+<!-- SLIDE 5 : PROPOSAL -->
+<div class="slide" id="s5">
+  <div class="card">
+    <h1>Vanshuu 🌹</h1>
+    <p>Will you be my Valentine? ❤️</p>
+    <button class="yes" onclick="go(6)">YES 💍</button>
+    <button class="next">NO is not accepted 😌</button>
+  </div>
+</div>
+
+<!-- SLIDE 6 : TYPE LETTER -->
+<div class="slide" id="s6">
+  <div class="card">
+    <h2>Forever Starts Here 💖</h2>
+    <div class="typebox" id="typeText"></div>
+  </div>
+</div>
+
+<script>
+function startMusic(){
+  document.getElementById("bgm").play().catch(()=>{});
+}
+
+/* slides */
+function go(n){
+  document.querySelectorAll(".slide").forEach(s=>s.classList.remove("active"));
+  document.getElementById("s"+n).classList.add("active");
+  if(n===3) startPhotos();
+  if(n===6) startTyping();
+}
+
+/* no run */
+const noBtn=document.getElementById("noBtn");
+function moveNo(){
+  noBtn.style.left=Math.random()*220+"px";
+  noBtn.style.top=Math.random()*160+"px";
+}
+noBtn.addEventListener("touchstart",moveNo);
+noBtn.addEventListener("mouseover",moveNo);
+
+/* PHOTO SEQUENCE (10s each) */
+const photos=[
+  {src:"photo1.jpg",text:"This moment reminds me how effortlessly you make me smile. Being with you feels light, natural, and warm. Even simple moments turn special when you’re around, and this memory always brings me back to that exact feeling."},
+  {src:"photo2.jpg",text:"Every time I look at this picture, I’m reminded of how comfortable I feel with you. There’s peace in moments like these, where nothing else matters except us being exactly where we are."},
+  {src:"photo3.jpg",text:"This memory holds laughter, closeness, and a happiness that can’t really be explained. It represents the bond we share and the connection that keeps growing stronger with time."},
+  {src:"photo4.jpg",text:"This picture isn’t just a memory, it’s a feeling. A reminder that with you, even ordinary days become something worth remembering forever."}
+];
+
+let p=0,photoTimer;
+function startPhotos(){
+  const img=document.getElementById("photo");
+  const cap=document.getElementById("caption");
+  p=0;
+  showPhoto();
+  photoTimer=setInterval(()=>{
+    p++;
+    if(p>=photos.length){
+      clearInterval(photoTimer);
+      return;
+    }
+    showPhoto();
+  },10000);
+}
+
+function showPhoto(){
+  document.getElementById("photo").src=photos[p].src;
+  document.getElementById("caption").innerText=photos[p].text;
+}
+
+/* typing letter */
+const msg=`Vanshuu, choosing you is something that feels natural to me.
+It feels right in a way that doesn’t need explanation.
+I want to walk forward with you, grow with you,
+and build something meaningful together.
+You are my everything, Tum mera emotions control krti ho,
+tum mera woh comfort zone ho jb mai dukhi ya 
+pareshan rhta hun tum hii ho jo mujhe khus krdeti ho 🤭tumhe hug krke ayesa feel hota h jaise mujhe sab mil gya ho sb kch 🥹 
+
+Mai roz galtiya krta hun tum roz maaf krti ho,🥺🥺
+mujhe tmhara woh pyaar bann naa h taaki tmhe mujhpe proud ho shyd abhi nhi h...
+But I promise kii ek din ayesa aayega jb tumhe 
+mujhpe bohot proud hoga tum chila k sbko bta paaogi kii yeh mera boyfriend h 🤞
+
+Meri tarah mere liye tum uss 
+trophy kii tarah ho jisse mai harr jagah flex krta hun kii dekho yeh h meri vanshu, yeh mere sai sbse jyada pyaar krti h....
+Pta h diwali mai jab ghr gaya tha apne saare dosto ko pakka diya tha harr jagah tumhara naam le leke kii meri vanshu ayesi h meri vanshu waisi meri vanshu ayese khaati h meri vanshu ayese chalti h bas pure tym meri vanshu meri vanshu 🥹 
+shyd mai tumhara first nhi thaa naa second but i pray daily kii mai tumhara last houn kiuki mere liye mera last mera sab kch tum ho 💟
+
+Today, tomorrow, and every day after —
+I choose you ❤️
+I love You Mera Bhawww Bhawww 🧿`;
+
+let i=0;
+function startTyping(){
+  const el=document.getElementById("typeText");
+  el.innerHTML="";
+  i=0;
+  const t=setInterval(()=>{
+    el.innerHTML+=msg.charAt(i);
+    i++;
+    if(i>=msg.length) clearInterval(t);
+  },35);
+}
+
+/* hearts */
+setInterval(()=>{
+  const h=document.createElement("div");
+  h.className="heart";
+  h.innerHTML="💖";
+  h.style.left=Math.random()*100+"vw";
+  document.body.appendChild(h);
+  setTimeout(()=>h.remove(),5000);
+},600);
+</script>
+
+</body>
+  </html>
